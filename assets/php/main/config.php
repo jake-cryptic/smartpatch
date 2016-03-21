@@ -41,9 +41,9 @@ $site = array(
 		"defaultPatchMaxSizeStr" => "10MB",
 		"premiumPatchMaxSizeStr" => "90MB"),
 	"server" => array(
-		"host" => "$protocol://smartclashcoc.com/", // Set this to your domain must end with a / and start with http:// or https://
+		"host" => "$protocol://patch.smartclashcoc.com/", // Set this to your domain must end with a / and start with http:// or https://
 		"mainPage" => "index.php", // Change only if you renamed the index.php file
-		"pathToMainPage" => "smartpatch/") // Only change if it is in a folder not the server root e.g. http://website/FOLDER_HERE/index.php
+		"pathToMainPage" => "") // Only change if it is in a folder not the server root e.g. http://website/FOLDER_HERE/index.php
 );
 
 $fullPathToHome = $site["server"]["host"] . $site["server"]["pathToMainPage"] . $site["server"]["mainPage"];
