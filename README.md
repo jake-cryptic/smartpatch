@@ -18,7 +18,7 @@ Check out the full tutorial at https://github.com/smartclash/smartpatch/wiki/Pat
 
 #Credits : 
 
-The whole script is created by Jake cryptic (link to the repo will be done soon)
+The whole script is created by Jake cryptic https://github.com/jake-cryptic/patchy2
 
 #Contribute
 
