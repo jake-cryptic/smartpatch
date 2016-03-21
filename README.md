@@ -1,3 +1,7 @@
+#This is built directory
+
+We build your awesome Smart Patch over here and make any commits. Please be sure that the programe here is likely to be un-stable and we prefer you to use either the master branch or from the release if you would like to have one compiled and ready to use
+
 # smartpatch
 An amazing patching server for ultrapowa and redmoon servers with an amazing slick UI for the ease of users with online server management.
 
