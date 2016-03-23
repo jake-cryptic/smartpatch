@@ -37,11 +37,11 @@ $site = array(
 		"defaultPatchAmount" => 25,
 		"premiumPatchAmount" => 500,
 		"defaultPatchMaxSize" => 10240000, // 10MB
-		"premiumPatchMaxSize" => 15360000, // 15MB
+		"premiumPatchMaxSize" => 92160000, // 90MB
 		"defaultPatchMaxSizeStr" => "10MB",
 		"premiumPatchMaxSizeStr" => "90MB"),
 	"server" => array(
-		"host" => "$protocol://localhost/", // Set this to your domain must end with a / and start with http:// or https://
+		"host" => "$protocol://patch.smartclashcoc.com/", // Set this to your domain must end with a / and start with http:// or https://
 		"mainPage" => "index.php", // Change only if you renamed the index.php file
 		"pathToMainPage" => "") // Only change if it is in a folder not the server root e.g. http://website/FOLDER_HERE/index.php
 );
