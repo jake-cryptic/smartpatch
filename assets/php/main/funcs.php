@@ -8,6 +8,15 @@ function accountLoggedIn() {
 	}
 }
 
+function getCWF() {
+	// Will output something like https://patchy.co.nf/patchserver/
+	// Basically gets the current folder of the script 
+	if ($_SERVER["SERVER_PORT"] == 443) $_CWFprotocol = "https"; else $_CWFprotocol = "http";
+	if (dirname($_SERVER['SCRIPT_NAME']) == "\\") $_CWFdir = "/"; else $_CWFdir = dirname($_SERVER['SCRIPT_NAME']) . "/";
+	$_CWF = "$_CWFprotocol://" . $_SERVER["SERVER_NAME"] . $_CWFdir;
+	return $_CWF;
+}
+
 function createUniqueSalt() {
 	$rand = time()*rand(128,256);
 	$hash = hash("sha512",$rand);
@@ -22,20 +31,40 @@ function hashPassword($pw,$s1,$s2) {
 	return $hashPass3;
 }
 
-function makeServer($user) {
+function createToken($un,$pw,$s1,$s2) {
+	$toHash = $s1 . $un . $pw .$s2;
+	$hashPass1 = hash("sha384",$toHash);
+	$hashPass2 = hash("sha384",$s1);
+	$hashPass3 = hash("sha384",$s2);
+	return $hashPass3;
+}
+
+function createServer($user) {
 	$structure = 'patch/' . $user . "/";
-	if (!@mkdir($structure, 0777, true)) {
-		return False;
+	if (file_exists($structure)) {
+		return 0;
 	} else {
-		return True;
+		if (!@mkdir($structure, 0777, true)) {
+			return 2;
+		} else {
+			return 1;
+		}
+		
 	}
 }
 
 function readPatchFolder($dir) {
 	$scan = @scandir($dir);
 	$patches = count($scan)-2; // Remove . and  ..
+	
+	if ($patches != $_SESSION["usedPatchInt"]) {
+		$patchReturn = "<p style=\"font-size:1.2em;\">Database and Patch Server are out of sync, <a class='white-link' href='assets/php/scripts/recount.php' title='Re-Sync Patch Count'>click to fix</a></p><br />";
+	} else {
+		$patchReturn = "";
+	}
+	
 	if ($patches > 0) {
-		echo '
+		$patchReturn .= '
 		<table id="patchTable" class="table">
 			<thead>
 				<tr>
@@ -46,12 +75,15 @@ function readPatchFolder($dir) {
 			<tbody>';
 		foreach($scan as $patch){
 			if($patch != '.' && $patch != '..'){
-				echo "<tr><td>" . $patch . "</td><td><a href='assets/php/scripts/delete.php?patch=$patch' class='white-link'>Delete</a></td></tr>";
+				$patchReturn .= "<tr><td>" . $patch . "</td><td><a href='assets/php/scripts/delete.php?patch=$patch' class='white-link'>Delete</a></td></tr>";
 			}
 		}
-		echo '
+		$patchReturn .= '
 			</tbody>
-		</table><br /><br /><span id="patchesFound">' . $patches . ' patches found</span>';
+		</table><br /><br /><span id="patchesFound">Patch Amount: ' . $patches . '</span>';
+		return $patchReturn;
+	} else {
+		return False;
 	}
 }
 
@@ -90,11 +122,15 @@ function checkPatchAmount() {
 	}
 } 
 
-function checkIfCanDel() {
+function checkIfCanDel($path,$target) {
 	if ($_SESSION["usedPatchInt"] > 0) {
-		return True;
+		if (file_exists($path . $target)) {
+			return True;
+		} else {
+			die("<script> window.location.href='$fullPathToRoot?p=svr&msg=4'; </script>");
+		}
 	} else {
-		return False;
+		die("<script> window.location.href='$fullPathToRoot?p=svr&msg=5'; </script>");
 	}
 }
 

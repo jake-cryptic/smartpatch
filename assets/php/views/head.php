@@ -41,7 +41,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo $site["server"]["host"]; ?>?p=lgo" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo $fullPathToRoot; ?>?p=lgo" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -88,12 +88,7 @@
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="<?php echo $site["server"]["host"]; ?>?p=home"><i class="fa fa-link"></i> <span>Home</span></a></li>
-        <li><a href="<?php echo $site["server"]["host"]; ?>?p=svr"><i class="fa fa-server"></i> <span>Patches</span></a></li>
-		<li><a href="<?php echo $site["server"]["host"]; ?>?p=acc"><i class="fa fa-link"></i> <span>Account</span></a></li>
-		<li><a href="<?php echo $site["server"]["host"]; ?>?p=nfo"><i class="fa fa-link"></i> <span>About</span></a></li>
-		<li><a href="<?php echo $site["server"]["host"]; ?>?p=hlp"><i class="fa fa-link"></i> <span>Help</span></a></li>
-		<li><a href="<?php echo $site["server"]["host"]; ?>?p=lgo"><i class="fa fa-link"></i> <span>Logout</span></a></li>
+		<?php @include("navigation.php"); ?>
        </ul>
       <!-- /.sidebar-menu -->
     </section>

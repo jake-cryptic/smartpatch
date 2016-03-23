@@ -53,7 +53,7 @@ if (accountLoggedIn()) {
 	}
 	session_regenerate_id();
 	$conn->close();
-	echo "<script> location.href='{$fullPathToHome}?p=acc&msg=1'; </script>";
+	echo "<script> window.location.href='{$fullPathToHome}?p=acc&msg=1'; </script>";
 	die();
 } else {
 	$conn->close();

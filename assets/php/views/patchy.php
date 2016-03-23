@@ -1,64 +1,49 @@
 <?php include("head.php"); ?>
 <div class="content-wrapper">
 	<section class="content-header">
-	<h2>Site version goals</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Feature</th>
-					<th>Expected Version</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>New account types</td>
-					<td>1.x</td>
-					<td>Done</td>
-				</tr>
-				<tr>
-					<td>FAQ/Better support system</td>
-					<td>2.x</td>
-					<td>Working on..</td>
-				</tr>
-				<tr>
-					<td>Admin Control Panel</td>
-					<td>2.x</td>
-					<td>Improving</td>
-				</tr>
-				<tr>
-					<td>More archive formats</td>
-					<td>3.x</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>More languages</td>
-					<td>3.x</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>Brute force login prevention</td>
-					<td>3.5</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>File upload progress bar</td>
-					<td>4.0</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>More patch management options</td>
-					<td>4.0</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>Use AJAX more often to speed up site</td>
-					<td>5.0</td>
-					<td>...</td>
-				</tr>
-			</tbody>
-		</table>
-	
+		<div id="future">
+			<h2>Site version goals</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th>Next update</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody id="table_body">
+					
+				</tbody>
+			</table>
+		</div>
+		<div id="patchy">
+			<!--<h2><a href="http://patchy-a.co.nf/" title="Patchy Other">Patchy Global Server</a></h2>-->
+			<script type="text/javascript">
+			$('#table_body').html('<h2>Please wait...</h2>');
+			$(document).ready(function(){
+				$.ajaxSetup({
+					error: function() {
+						$('#table_body').html('<h2>Loading Fallback</h2>');
+						$.ajaxSetup({
+							error: function() {
+								$('#table_body').html('<h2>Couldn\'t load from secure server or global server</h2>');
+							}
+						});
+						
+						var url = 'http://patchy-a.co.nf/update_list.php'
+						$.get(url, function(response) {
+							$('#table_body').html(response);
+						});
+					}
+				});
+				
+				var url = 'https://googledrive.com/host/0B0RxtOYOzL0TRlVTNzI0cFN4OTA';
+				$.get(url, function(response) {
+					$('#table_body').html(response);
+				});
+			});
+			</script>
+		</div>
 	</section>
 </div>
 <?php include("foot.php"); ?>

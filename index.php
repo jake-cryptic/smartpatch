@@ -35,7 +35,9 @@
 		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-		<!-- SCRIPTS AND GRAPHICS -->
+				<!-- SCRIPTS AND GRAPHICS -->
+		<!-- jQuery 2.1.4 -->
+		<script src="plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

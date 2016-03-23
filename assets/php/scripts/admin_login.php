@@ -48,7 +48,7 @@ if (!accountLoggedIn()) {
 						} else {
 							die("You aren't an admin");
 						}
-						echo "<script> location.href='../../../admin.php'; </script>";
+						echo "<script> location.href='{$fullPathToRoot}admin.php'; </script>";
 					} else {
 						die("Account isn't active, contact support for help");
 					}

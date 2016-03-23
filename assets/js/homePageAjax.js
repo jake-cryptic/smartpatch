@@ -28,27 +28,37 @@ $(document).ready(function() {
 		var createUserN = $("#createUsername").val();
 		var createPassW = SHA512.hex($("#createPassword").val());
 		
-		var createStr = "createEmail=" + createEmail + "&createUsername=" + createUserN + "&createPassword=" + createPassW;
-		
-		$.ajax({
-			url: 'assets/php/scripts/create.php', // This script handles the form
-			type: 'POST', // Method used to send data !DONT CHANGE
-			dataType: 'html', // Request type
-			data: createStr, // 'serialize' form data 
-			beforeSend: function() {
-				$("#createButton").prop('value', 'Creating'); // Indicate that the form is being processed
-			},
-			success: function(data) {
+		if ($("#createPassword").val().length > 5) {
+			if ($("#createUsername").val().length < 50) {
+				var createStr = "createEmail=" + createEmail + "&createUsername=" + createUserN + "&createPassword=" + createPassW;
+			
+				$.ajax({
+					url: 'assets/php/scripts/create.php', // This script handles the form
+					type: 'POST', // Method used to send data !DONT CHANGE
+					dataType: 'html', // Request type
+					data: createStr, // 'serialize' form data 
+					beforeSend: function() {
+						$("#createButton").prop('value', 'Creating'); // Indicate that the form is being processed
+					},
+					success: function(data) {
+						toggleCreateMessage();
+						notifications.addClass("hasNotification");
+						notifications.html(data).fadeIn(1000);
+						$("#createButton").prop('value', 'Create');
+					},
+					error: function(e) {
+						toggleCreateMessage();
+						console.log(e); // Log any errors
+					}
+				});
+			} else {
+				alert("Username too long");
 				toggleCreateMessage();
-				notifications.addClass("hasNotification");
-				notifications.html(data).fadeIn(1000);
-				$("#createButton").prop('value', 'Create');
-			},
-			error: function(e) {
-				toggleCreateMessage();
-				console.log(e); // Log any errors
 			}
-		});
+		} else {
+			alert("Password not long enough");
+			toggleCreateMessage();
+		}
 	});
 	$("#loginForm").on('submit', function(e) {
 		e.preventDefault(); // prevent default
@@ -70,7 +80,7 @@ $(document).ready(function() {
 				toggleLoginMessage();
 				notifications.addClass("hasNotification");
 				notifications.html(data).fadeIn(1000);
-				$("#createButton").prop('value', 'Login');
+				$("#loginbutton").prop('value', 'Login');
 			},
 			error: function(e) {
 				toggleLoginMessage();

@@ -11,4 +11,3 @@
 	</section>
 </div>
 <?php include("foot.php"); ?>
-
